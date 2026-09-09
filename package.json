@@ -1,0 +1,61 @@
+{
+  "name": "n8n-nodes-memorysync",
+  "version": "1.0.9",
+  "description": "MemorySync nodes for n8n: memory operations for any workflow (add, search, recall, list, delete) plus a persistent AI Agent chat-memory sub-node backed by MemorySync.",
+  "license": "MIT",
+  "homepage": "https://docs.memorysync.io/guides/n8n",
+  "author": {
+    "name": "MemorySync",
+    "email": "support@memorysync.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/memorysyncio/n8n-nodes-memorysync.git"
+  },
+  "keywords": [
+    "n8n-community-node-package",
+    "memorysync",
+    "memory",
+    "ai",
+    "agent",
+    "chat-memory"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "n8n-node build",
+    "build:watch": "tsc --watch",
+    "dev": "n8n-node dev",
+    "lint": "n8n-node lint",
+    "lint:fix": "n8n-node lint --fix",
+    "test": "npm run build && node --test tests/contract.test.mjs tests/memory.test.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "aiNodeSdkVersion": 1,
+    "strict": true,
+    "credentials": [
+      "dist/credentials/MemorySyncApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/MemorySync/MemorySync.node.js",
+      "dist/nodes/MemorySyncChatMemory/MemorySyncChatMemory.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@n8n/ai-node-sdk": "0.27.4",
+    "@n8n/node-cli": "^0.46.4",
+    "@types/node": "^22.0.0",
+    "eslint": "9.32.0",
+    "n8n-workflow": "2.37.4",
+    "typescript": "5.9.2"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*",
+    "@n8n/ai-node-sdk": "*"
+  }
+}

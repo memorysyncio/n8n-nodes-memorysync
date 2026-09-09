@@ -1,0 +1,29 @@
+name: Publish to npm
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      # --ignore-scripts: the dev tree includes a native test-only module
+      # (isolated-vm) whose compile step is irrelevant to building dist/.
+      - run: npm ci --ignore-scripts
+      # n8n's own community-node lint (@n8n/node-cli, strict mode) — the
+      # rules the verification review applies. A finding blocks the publish.
+      - run: npm run lint
+      # n8n-node build + the contract and behaviour suites (node --test).
+      - run: npm test
+      - run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

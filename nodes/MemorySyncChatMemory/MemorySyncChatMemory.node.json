@@ -1,0 +1,10 @@
+{
+	"node": "n8n-nodes-memorysync.memorySyncChatMemory",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Data & Storage"],
+	"resources": {
+		"credentialDocumentation": [{ "url": "https://docs.memorysync.io/guides/n8n" }],
+		"primaryDocumentation": [{ "url": "https://docs.memorysync.io/guides/n8n" }]
+	}
+}
